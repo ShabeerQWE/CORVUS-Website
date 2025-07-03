@@ -2,6 +2,7 @@
 
 import { motion } from 'framer-motion';
 import Link from 'next/link';
+import AboutParticles from '@/components/AboutParticles';
 
 const fadeInUp = {
   initial: { opacity: 0, y: 20 },
@@ -47,9 +48,9 @@ export default function AboutPage() {
             transition={{ duration: 0.8 }}
             className="max-w-4xl mx-auto text-center"
           >
-            <h1 className="text-5xl md:text-6xl font-bold mb-6">
-              About Corvus Labs
-            </h1>
+            <div className="mb-6">
+              <AboutParticles />
+            </div>
             <p className="text-xl md:text-2xl text-blue-100">
               Smarter Systems. Seamless Growth.
             </p>
