@@ -59,3 +59,25 @@ h1, h2, h3, h4, h5, h6 {
 .animation-delay-4000 {
   animation-delay: 4s;
 }
+
+/* Fix for content disappearing on scroll */
+section {
+  position: relative;
+  z-index: 1;
+}
+
+/* Ensure navigation stays on top */
+nav {
+  z-index: 50 !important;
+}
+
+/* Prevent parallax overflow issues */
+.overflow-hidden > * {
+  position: relative;
+}
+
+/* Ensure hero content stays visible */
+.hero-content {
+  position: relative;
+  z-index: 10;
+}

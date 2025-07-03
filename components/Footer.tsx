@@ -5,13 +5,13 @@ const Footer = () => {
   const currentYear = new Date().getFullYear()
 
   return (
-    <footer className="bg-black border-t border-gray-800">
+    <footer className="bg-bg-black border-t border-border-gray">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
         <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
           {/* Company Info */}
           <div>
-            <h3 className="text-primary text-lg font-semibold mb-4">Corvus Labs</h3>
-            <p className="text-gray-400 text-sm mb-4">
+            <h3 className="text-text-primary text-lg font-semibold mb-4">Corvus Labs</h3>
+            <p className="text-text-secondary text-sm mb-4">
               Smarter Systems. Seamless Growth.
             </p>
             <img
@@ -23,8 +23,8 @@ const Footer = () => {
 
           {/* Contact Information */}
           <div>
-            <h3 className="text-primary text-lg font-semibold mb-4">Contact</h3>
-            <div className="space-y-2 text-gray-400 text-sm">
+            <h3 className="text-text-primary text-lg font-semibold mb-4">Contact</h3>
+            <div className="space-y-2 text-text-secondary text-sm">
               <p>Email: info@corvuslabs.com</p>
               <p>Phone: +1 (555) 123-4567</p>
               <p>Address: 123 Tech Street, Suite 100</p>
@@ -34,11 +34,11 @@ const Footer = () => {
 
           {/* Social Media Links */}
           <div>
-            <h3 className="text-primary text-lg font-semibold mb-4">Follow Us</h3>
+            <h3 className="text-text-primary text-lg font-semibold mb-4">Follow Us</h3>
             <div className="flex space-x-4">
               <a
                 href="#"
-                className="text-gray-400 hover:text-accent-blue transition-colors duration-200"
+                className="text-text-secondary hover:text-accent-blue transition-colors duration-200"
                 aria-label="Twitter"
               >
                 <svg className="h-6 w-6" fill="currentColor" viewBox="0 0 24 24">
@@ -47,7 +47,7 @@ const Footer = () => {
               </a>
               <a
                 href="#"
-                className="text-gray-400 hover:text-accent-blue transition-colors duration-200"
+                className="text-text-secondary hover:text-accent-blue transition-colors duration-200"
                 aria-label="LinkedIn"
               >
                 <svg className="h-6 w-6" fill="currentColor" viewBox="0 0 24 24">
@@ -56,7 +56,7 @@ const Footer = () => {
               </a>
               <a
                 href="#"
-                className="text-gray-400 hover:text-accent-blue transition-colors duration-200"
+                className="text-text-secondary hover:text-accent-blue transition-colors duration-200"
                 aria-label="GitHub"
               >
                 <svg className="h-6 w-6" fill="currentColor" viewBox="0 0 24 24">
@@ -68,8 +68,8 @@ const Footer = () => {
         </div>
 
         {/* Copyright */}
-        <div className="mt-8 pt-8 border-t border-gray-800">
-          <p className="text-center text-gray-400 text-sm">
+        <div className="mt-8 pt-8 border-t border-border-gray">
+          <p className="text-center text-text-secondary text-sm">
             © {currentYear} Corvus Labs. All rights reserved.
           </p>
         </div>

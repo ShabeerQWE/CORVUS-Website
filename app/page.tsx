@@ -12,71 +12,62 @@ import {
   FaChartBar,
   FaRocket,
 } from 'react-icons/fa'
+import { AnimatedText } from '@/components/AnimatedText'
+import { AnimatedCard } from '@/components/AnimatedCard'
+import { AnimatedButton } from '@/components/AnimatedButton'
+import { ParallaxSection } from '@/components/ParallaxSection'
 
 export default function Home() {
   return (
     <main className="min-h-screen bg-bg-black text-text-primary">
       {/* Hero Section */}
       <section className="relative overflow-hidden">
-        <div className="container mx-auto px-4 py-24 md:py-32">
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.8 }}
-            className="text-center max-w-4xl mx-auto"
-          >
-            <h1 className="text-5xl md:text-7xl font-bold mb-6 bg-gradient-to-r from-accent-blue to-accent-purple bg-clip-text text-transparent">
-              Smarter Systems. Seamless Growth.
-            </h1>
-            <p className="text-xl md:text-2xl text-text-secondary mb-8 max-w-2xl mx-auto">
-              Corvus Labs helps businesses automate and optimize their operations with cutting-edge AI, CRM, ERP, and MSP solutions.
-            </p>
-            <motion.div
-              initial={{ opacity: 0 }}
-              animate={{ opacity: 1 }}
-              transition={{ delay: 0.4, duration: 0.6 }}
-            >
-              <Link
-                href="/contact"
-                className="inline-block bg-accent-blue hover:bg-accent-purple text-white font-semibold px-8 py-4 rounded-lg transition-all duration-300 transform hover:scale-105 hover:shadow-lg hover:shadow-accent-purple/25"
-              >
+        <div className="container mx-auto px-4 py-24 md:py-32 relative z-10">
+          <div className="text-center max-w-4xl mx-auto">
+            <AnimatedText delay={0.1}>
+              <h1 className="text-5xl md:text-7xl font-bold mb-6 bg-gradient-to-r from-accent-blue to-accent-purple bg-clip-text text-transparent">
+                Smarter Systems. Seamless Growth.
+              </h1>
+            </AnimatedText>
+            
+            <AnimatedText delay={0.3} direction="up">
+              <p className="text-xl md:text-2xl text-text-secondary mb-8 max-w-2xl mx-auto">
+                Corvus Labs helps businesses automate and optimize their operations with cutting-edge AI, CRM, ERP, and MSP solutions.
+              </p>
+            </AnimatedText>
+            
+            <AnimatedText delay={0.5}>
+              <AnimatedButton href="/contact" variant="primary" size="lg">
                 Get Started Today
-              </Link>
-            </motion.div>
-          </motion.div>
+              </AnimatedButton>
+            </AnimatedText>
+          </div>
         </div>
         
         {/* Background gradient effect */}
-        <div className="absolute inset-0 -z-10">
-          <div className="absolute top-0 -left-4 w-72 h-72 bg-accent-purple/20 rounded-full mix-blend-multiply filter blur-xl opacity-70 animate-blob"></div>
-          <div className="absolute top-0 -right-4 w-72 h-72 bg-accent-blue/20 rounded-full mix-blend-multiply filter blur-xl opacity-70 animate-blob animation-delay-2000"></div>
-          <div className="absolute -bottom-8 left-20 w-72 h-72 bg-accent-green/20 rounded-full mix-blend-multiply filter blur-xl opacity-70 animate-blob animation-delay-4000"></div>
+        <div className="absolute inset-0 -z-10 overflow-hidden">
+          <ParallaxSection className="relative h-full" speed={0.15} offset={0}>
+            <div className="absolute top-0 -left-4 w-72 h-72 bg-accent-purple/20 rounded-full mix-blend-multiply filter blur-xl opacity-70 animate-blob"></div>
+            <div className="absolute top-0 -right-4 w-72 h-72 bg-accent-blue/20 rounded-full mix-blend-multiply filter blur-xl opacity-70 animate-blob animation-delay-2000"></div>
+            <div className="absolute -bottom-8 left-20 w-72 h-72 bg-accent-green/20 rounded-full mix-blend-multiply filter blur-xl opacity-70 animate-blob animation-delay-4000"></div>
+          </ParallaxSection>
         </div>
       </section>
 
       {/* Services Overview Section */}
       <section className="py-20 bg-bg-gray">
         <div className="container mx-auto px-4">
-          <motion.div
-            initial={{ opacity: 0 }}
-            whileInView={{ opacity: 1 }}
-            transition={{ duration: 0.8 }}
-            viewport={{ once: true }}
-            className="text-center mb-12"
-          >
+          <AnimatedText className="text-center mb-12">
             <h2 className="text-4xl md:text-5xl font-bold mb-4">Our Services</h2>
             <p className="text-xl text-text-secondary max-w-2xl mx-auto">
               Comprehensive solutions tailored to transform your business operations
             </p>
-          </motion.div>
+          </AnimatedText>
 
           <div className="grid grid-cols-1 md:grid-cols-2 gap-8 max-w-5xl mx-auto">
             {/* AI Automation Card */}
-            <motion.div
-              initial={{ opacity: 0, y: 20 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.5 }}
-              viewport={{ once: true }}
+            <AnimatedCard
+              delay={0.1}
               className="bg-bg-black border border-border-gray rounded-xl p-8 hover:border-accent-blue transition-all duration-300 group"
             >
               <div className="text-accent-blue text-4xl mb-4 group-hover:scale-110 transition-transform duration-300">
@@ -86,14 +77,11 @@ export default function Home() {
               <p className="text-text-secondary">
                 Leverage cutting-edge AI to automate repetitive tasks, enhance decision-making, and unlock new efficiencies across your organization.
               </p>
-            </motion.div>
+            </AnimatedCard>
 
             {/* CRM Systems Card */}
-            <motion.div
-              initial={{ opacity: 0, y: 20 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.5, delay: 0.1 }}
-              viewport={{ once: true }}
+            <AnimatedCard
+              delay={0.2}
               className="bg-bg-black border border-border-gray rounded-xl p-8 hover:border-accent-purple transition-all duration-300 group"
             >
               <div className="text-accent-purple text-4xl mb-4 group-hover:scale-110 transition-transform duration-300">
@@ -103,14 +91,11 @@ export default function Home() {
               <p className="text-text-secondary">
                 Build stronger customer relationships with our custom CRM solutions that streamline sales, marketing, and support processes.
               </p>
-            </motion.div>
+            </AnimatedCard>
 
             {/* ERP Solutions Card */}
-            <motion.div
-              initial={{ opacity: 0, y: 20 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.5, delay: 0.2 }}
-              viewport={{ once: true }}
+            <AnimatedCard
+              delay={0.3}
               className="bg-bg-black border border-border-gray rounded-xl p-8 hover:border-accent-green transition-all duration-300 group"
             >
               <div className="text-accent-green text-4xl mb-4 group-hover:scale-110 transition-transform duration-300">
@@ -120,14 +105,11 @@ export default function Home() {
               <p className="text-text-secondary">
                 Integrate and optimize your entire business operations with comprehensive ERP systems tailored to your industry needs.
               </p>
-            </motion.div>
+            </AnimatedCard>
 
             {/* MSP Services Card */}
-            <motion.div
-              initial={{ opacity: 0, y: 20 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.5, delay: 0.3 }}
-              viewport={{ once: true }}
+            <AnimatedCard
+              delay={0.4}
               className="bg-bg-black border border-border-gray rounded-xl p-8 hover:border-accent-orange transition-all duration-300 group"
             >
               <div className="text-accent-orange text-4xl mb-4 group-hover:scale-110 transition-transform duration-300">
@@ -137,7 +119,7 @@ export default function Home() {
               <p className="text-text-secondary">
                 Focus on your core business while we manage your IT infrastructure with proactive monitoring, maintenance, and support.
               </p>
-            </motion.div>
+            </AnimatedCard>
           </div>
         </div>
       </section>
@@ -145,18 +127,12 @@ export default function Home() {
       {/* Trust/Value Proposition Section */}
       <section className="py-20">
         <div className="container mx-auto px-4">
-          <motion.div
-            initial={{ opacity: 0 }}
-            whileInView={{ opacity: 1 }}
-            transition={{ duration: 0.8 }}
-            viewport={{ once: true }}
-            className="text-center mb-12"
-          >
+          <AnimatedText className="text-center mb-12">
             <h2 className="text-4xl md:text-5xl font-bold mb-4">Why Choose Corvus Labs?</h2>
             <p className="text-xl text-text-secondary max-w-2xl mx-auto">
               We deliver measurable results that transform your business
             </p>
-          </motion.div>
+          </AnimatedText>
 
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8 max-w-6xl mx-auto">
             {/* Value Prop 1 */}
@@ -233,13 +209,7 @@ export default function Home() {
       {/* CTA Section */}
       <section className="py-20 bg-gradient-to-r from-accent-blue/10 to-accent-purple/10">
         <div className="container mx-auto px-4">
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.8 }}
-            viewport={{ once: true }}
-            className="text-center max-w-3xl mx-auto"
-          >
+          <AnimatedText className="text-center max-w-3xl mx-auto" direction="up">
             <h2 className="text-4xl md:text-5xl font-bold mb-6">
               Ready to Transform Your Business?
             </h2>
@@ -247,20 +217,14 @@ export default function Home() {
               Join hundreds of companies that have revolutionized their operations with Corvus Labs
             </p>
             <div className="flex flex-col sm:flex-row gap-4 justify-center">
-              <Link
-                href="/contact"
-                className="inline-block bg-accent-blue hover:bg-accent-purple text-white font-semibold px-8 py-4 rounded-lg transition-all duration-300 transform hover:scale-105 hover:shadow-lg hover:shadow-accent-purple/25"
-              >
+              <AnimatedButton href="/contact" variant="primary" size="lg">
                 Book a Consultation
-              </Link>
-              <Link
-                href="/services"
-                className="inline-block bg-transparent border-2 border-accent-blue hover:border-accent-purple text-accent-blue hover:text-accent-purple font-semibold px-8 py-4 rounded-lg transition-all duration-300 transform hover:scale-105"
-              >
+              </AnimatedButton>
+              <AnimatedButton href="/services" variant="secondary" size="lg">
                 Learn More
-              </Link>
+              </AnimatedButton>
             </div>
-          </motion.div>
+          </AnimatedText>
         </div>
       </section>
     </main>

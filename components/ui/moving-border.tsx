@@ -1,7 +1,7 @@
 "use client"
 import type React from "react"
 import { motion, useAnimationFrame, useMotionTemplate, useMotionValue, useTransform } from "framer-motion"
-import { useRef } from "react"
+import { useRef, useEffect, useState } from "react"
 import { cn } from "@/lib/utils"
 
 export function Button({
@@ -34,14 +34,14 @@ export function Button({
       <div className="absolute inset-0" style={{ borderRadius: `calc(${borderRadius} * 0.96)` }}>
         <MovingBorder duration={duration} rx="30%" ry="30%">
           <div
-            className={cn("h-20 w-20 bg-[radial-gradient(#1e3a8a_40%,transparent_60%)] opacity-[0.8]", borderClassName)}
+            className={cn("h-20 w-20 bg-[radial-gradient(var(--accent-blue)_40%,transparent_60%)] opacity-[0.8]", borderClassName)}
           />
         </MovingBorder>
       </div>
 
       <div
         className={cn(
-          "relative flex h-full w-full items-center justify-center border border-slate-800 bg-gradient-to-r from-sky-400 to-purple-600 text-sm text-white antialiased backdrop-blur-xl",
+          "relative flex h-full w-full items-center justify-center border border-border-gray bg-bg-black text-sm text-white antialiased backdrop-blur-xl",
           className,
         )}
         style={{
@@ -67,8 +67,44 @@ export const MovingBorder = ({
   ry?: string
   [key: string]: any
 }) => {
-  const pathRef = useRef<SVGRectElement>(null)
+  const pathRef = useRef<SVGPathElement>(null)
+  const svgRef = useRef<SVGSVGElement>(null)
   const progress = useMotionValue<number>(0)
+  const [pathData, setPathData] = useState<string>("")
+
+  useEffect(() => {
+    const updatePath = () => {
+      if (!svgRef.current) return
+      
+      const width = svgRef.current.clientWidth || 100
+      const height = svgRef.current.clientHeight || 100
+      
+      // Convert percentage-based rx/ry to actual pixels
+      const rxValue = rx ? (parseFloat(rx) / 100) * width : 0
+      const ryValue = ry ? (parseFloat(ry) / 100) * height : 0
+      
+      // Create a rectangular path with optional rounded corners
+      if (rxValue > 0 || ryValue > 0) {
+        setPathData(
+          `M ${rxValue},0
+           L ${width - rxValue},0
+           Q ${width},0 ${width},${ryValue}
+           L ${width},${height - ryValue}
+           Q ${width},${height} ${width - rxValue},${height}
+           L ${rxValue},${height}
+           Q 0,${height} 0,${height - ryValue}
+           L 0,${ryValue}
+           Q 0,0 ${rxValue},0 Z`
+        )
+      } else {
+        setPathData(`M 0,0 L ${width},0 L ${width},${height} L 0,${height} Z`)
+      }
+    }
+
+    updatePath()
+    window.addEventListener('resize', updatePath)
+    return () => window.removeEventListener('resize', updatePath)
+  }, [rx, ry])
 
   useAnimationFrame((time) => {
     const length = pathRef.current?.getTotalLength()
@@ -78,14 +114,28 @@ export const MovingBorder = ({
     }
   })
 
-  const x = useTransform(progress, (val) => pathRef.current?.getPointAtLength(val).x)
-  const y = useTransform(progress, (val) => pathRef.current?.getPointAtLength(val).y)
+  const x = useTransform(progress, (val) => {
+    try {
+      return pathRef.current?.getPointAtLength(val).x ?? 0
+    } catch {
+      return 0
+    }
+  })
+  
+  const y = useTransform(progress, (val) => {
+    try {
+      return pathRef.current?.getPointAtLength(val).y ?? 0
+    } catch {
+      return 0
+    }
+  })
 
   const transform = useMotionTemplate`translateX(${x}px) translateY(${y}px) translateX(-50%) translateY(-50%)`
 
   return (
     <>
       <svg
+        ref={svgRef}
         xmlns="http://www.w3.org/2000/svg"
         preserveAspectRatio="none"
         className="absolute h-full w-full"
@@ -93,7 +143,12 @@ export const MovingBorder = ({
         height="100%"
         {...otherProps}
       >
-        <rect fill="none" width="100%" height="100%" rx={rx} ry={ry} ref={pathRef} />
+        <path
+          fill="none"
+          stroke="none"
+          d={pathData}
+          ref={pathRef}
+        />
       </svg>
       <motion.div
         style={{
