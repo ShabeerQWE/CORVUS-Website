@@ -3,6 +3,7 @@
 import { useState } from 'react';
 import { useForm } from 'react-hook-form';
 import { motion } from 'framer-motion';
+import { Button } from '@/components/ui/moving-border';
 
 type FormData = {
   name: string;
@@ -170,12 +171,15 @@ export default function ContactPage() {
                 </div>
 
                 {/* Submit Button */}
-                <button
+                <Button
                   type="submit"
-                  className="w-full bg-gradient-to-r from-blue-600 to-purple-600 text-white font-semibold py-3 px-6 rounded-lg hover:from-blue-700 hover:to-purple-700 transition duration-300 transform hover:scale-105"
+                  containerClassName="w-full h-14 hover:scale-[1.02] transition-transform duration-200"
+                  className="bg-gradient-to-r from-blue-600 to-purple-600 hover:from-blue-700 hover:to-purple-700 text-white font-semibold text-base transition-all duration-200"
+                  borderClassName="bg-[radial-gradient(#3b82f6_40%,transparent_60%)]"
+                  duration={4000}
                 >
                   Send Message
-                </button>
+                </Button>
               </form>
             </motion.div>
 
