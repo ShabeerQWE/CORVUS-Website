@@ -80,8 +80,15 @@ export default function ContactPage() {
       });
 
       if (!response.ok) {
-        const errorData = await response.json();
-        throw new Error(errorData.error || 'Failed to send message');
+        // Check if the response is JSON before trying to parse it
+        const contentType = response.headers.get('content-type');
+        if (contentType && contentType.includes('application/json')) {
+          const errorData = await response.json();
+          throw new Error(errorData.error || 'Failed to send message');
+        } else {
+          // Handle non-JSON responses (like HTML error pages)
+          throw new Error(`Server error: ${response.status}`);
+        }
       }
 
       setShowSuccess(true);

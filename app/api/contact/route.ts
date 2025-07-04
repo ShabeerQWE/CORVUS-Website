@@ -1,8 +1,9 @@
 import { NextResponse } from 'next/server';
 import { Resend } from 'resend';
 
-// Initialize Resend with API key
-const resend = new Resend(process.env.RESEND_API_KEY);
+// Initialize Resend with API key (if available)
+const resendApiKey = process.env.RESEND_API_KEY;
+const resend = resendApiKey ? new Resend(resendApiKey) : null;
 
 // Email configuration
 const FROM_EMAIL = 'contact@corvusbpo.com';
@@ -18,6 +19,14 @@ export async function POST(req: Request) {
       return NextResponse.json(
         { error: 'Name, email and message are required' },
         { status: 400 }
+      );
+    }
+
+    // Check if Resend is properly initialized
+    if (!resend) {
+      return NextResponse.json(
+        { error: 'Email service is not configured. Please add a valid RESEND_API_KEY to your environment variables.' },
+        { status: 500 }
       );
     }
 
