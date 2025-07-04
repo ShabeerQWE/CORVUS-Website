@@ -18,6 +18,8 @@ type FormData = {
 
 export default function ContactPage() {
   const [showSuccess, setShowSuccess] = useState(false);
+  const [isLoading, setIsLoading] = useState(false);
+  const [error, setError] = useState<string | null>(null);
   
   const {
     register,
@@ -26,15 +28,37 @@ export default function ContactPage() {
     reset
   } = useForm<FormData>();
 
-  const onSubmit = (data: FormData) => {
-    console.log('Form submitted:', data);
-    setShowSuccess(true);
-    reset();
+  const onSubmit = async (data: FormData) => {
+    setIsLoading(true);
+    setError(null);
     
-    // Hide success message after 5 seconds
-    setTimeout(() => {
-      setShowSuccess(false);
-    }, 5000);
+    try {
+      const response = await fetch('/api/contact', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(data),
+      });
+
+      if (!response.ok) {
+        const errorData = await response.json();
+        throw new Error(errorData.error || 'Failed to send message');
+      }
+
+      setShowSuccess(true);
+      reset();
+      
+      // Hide success message after 5 seconds
+      setTimeout(() => {
+        setShowSuccess(false);
+      }, 5000);
+    } catch (err) {
+      setError(err instanceof Error ? err.message : 'Failed to send message');
+      console.error('Error sending message:', err);
+    } finally {
+      setIsLoading(false);
+    }
   };
 
   const fadeInUp = {
@@ -107,7 +131,7 @@ export default function ContactPage() {
               <div>
                 <h2 className="text-3xl font-bold mb-6">Send us a message</h2>
                 
-                {/* Success Message */}
+                {/* Status Messages */}
                 {showSuccess && (
                   <motion.div
                     initial={{ opacity: 0, y: -10 }}
@@ -115,6 +139,16 @@ export default function ContactPage() {
                     className="bg-accent-green/20 border border-accent-green text-accent-green px-4 py-3 rounded-lg mb-6"
                   >
                     Thank you for your message! We'll get back to you soon.
+                  </motion.div>
+                )}
+                
+                {error && (
+                  <motion.div
+                    initial={{ opacity: 0, y: -10 }}
+                    animate={{ opacity: 1, y: 0 }}
+                    className="bg-red-500/20 border border-red-500 text-red-500 px-4 py-3 rounded-lg mb-6"
+                  >
+                    {error}
                   </motion.div>
                 )}
 
@@ -165,11 +199,14 @@ export default function ContactPage() {
                 <Button
                   type="submit"
                   containerClassName="w-full h-14 hover:scale-[1.02] transition-transform duration-200"
-                  className="bg-accent-blue hover:bg-accent-purple text-white font-semibold text-base transition-all duration-300"
+                  className={`bg-accent-blue hover:bg-accent-purple text-white font-semibold text-base transition-all duration-300 ${
+                    isLoading ? 'opacity-50 cursor-not-allowed' : ''
+                  }`}
                   borderClassName="bg-[radial-gradient(var(--accent-blue-light)_40%,transparent_60%)]"
                   duration={4000}
+                  disabled={isLoading}
                 >
-                  Send Message
+                  {isLoading ? 'Sending...' : 'Send Message'}
                 </Button>
               </form>
               </div>
