@@ -11,7 +11,7 @@ import {
 import { AnimatedText } from '@/components/AnimatedText';
 import { AnimatedButton } from '@/components/AnimatedButton';
 import { ParallaxSection } from '@/components/ParallaxSection';
-import { GlowingServiceCard } from '@/components/GlowingServiceCard';
+import { ServiceCard } from '@/components/ServiceCard';
 
 export default function ServicesPage() {
   const services = [
@@ -32,9 +32,7 @@ export default function ServicesPage() {
         '24/7 automated operations',
         'Scale operations without adding headcount'
       ],
-      colorClass: 'text-accent-blue',
-      hoverClass: 'hover:border-accent-blue',
-      bgClass: 'bg-accent-blue'
+      colorClass: 'text-accent-blue'
     },
     {
       title: 'CRM Systems',
@@ -53,9 +51,7 @@ export default function ServicesPage() {
         'Enhanced customer insights',
         'Automated marketing campaigns'
       ],
-      colorClass: 'text-accent-purple',
-      hoverClass: 'hover:border-accent-purple',
-      bgClass: 'bg-accent-purple'
+      colorClass: 'text-accent-purple'
     },
     {
       title: 'ERP Solutions',
@@ -74,9 +70,7 @@ export default function ServicesPage() {
         'Reduced operational costs',
         'Improved decision-making'
       ],
-      colorClass: 'text-accent-green',
-      hoverClass: 'hover:border-accent-green',
-      bgClass: 'bg-accent-green'
+      colorClass: 'text-accent-green'
     },
     {
       title: 'MSP Services',
@@ -95,9 +89,7 @@ export default function ServicesPage() {
         'Regulatory compliance assurance',
         'Predictable IT costs'
       ],
-      colorClass: 'text-accent-orange',
-      hoverClass: 'hover:border-accent-orange',
-      bgClass: 'bg-accent-orange'
+      colorClass: 'text-accent-orange'
     }
   ];
 
@@ -153,7 +145,7 @@ export default function ServicesPage() {
         <div className="container mx-auto px-4">
           <div className="grid md:grid-cols-2 gap-8 max-w-7xl mx-auto">
             {services.map((service, index) => (
-              <GlowingServiceCard key={index} service={service} index={index} />
+              <ServiceCard key={index} service={service} />
             ))}
           </div>
         </div>
