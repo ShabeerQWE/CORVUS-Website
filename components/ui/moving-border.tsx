@@ -28,10 +28,11 @@ export function Button({
       className={cn("relative h-16 w-40 overflow-hidden bg-transparent p-[1px] text-xl", containerClassName)}
       style={{
         borderRadius: borderRadius,
+        position: "relative"
       }}
       {...otherProps}
     >
-      <div className="absolute inset-0" style={{ borderRadius: `calc(${borderRadius} * 0.96)` }}>
+      <div className="absolute inset-0" style={{ borderRadius: `calc(${borderRadius} * 0.96)`, position: "relative" }}>
         <MovingBorder duration={duration} rx="30%" ry="30%">
           <div
             className={cn("h-20 w-20 bg-[radial-gradient(var(--accent-blue-light)_40%,transparent_60%)] opacity-[0.8]", borderClassName)}
@@ -46,6 +47,7 @@ export function Button({
         )}
         style={{
           borderRadius: `calc(${borderRadius} * 0.96)`,
+          position: "relative"
         }}
       >
         {children}
@@ -133,14 +135,12 @@ export const MovingBorder = ({
   const transform = useMotionTemplate`translateX(${x}px) translateY(${y}px) translateX(-50%) translateY(-50%)`
 
   return (
-    <>
+    <div style={{ position: "relative", width: "100%", height: "100%" }}>
       <svg
         ref={svgRef}
         xmlns="http://www.w3.org/2000/svg"
         preserveAspectRatio="none"
-        className="absolute h-full w-full"
-        width="100%"
-        height="100%"
+        style={{ position: "absolute", width: "100%", height: "100%" }}
         {...otherProps}
       >
         <path
@@ -157,10 +157,11 @@ export const MovingBorder = ({
           left: 0,
           display: "inline-block",
           transform,
+          willChange: "transform"
         }}
       >
         {children}
       </motion.div>
-    </>
+    </div>
   )
 }

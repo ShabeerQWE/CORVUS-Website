@@ -1,21 +1,21 @@
 "use client";
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, ComponentPropsWithoutRef } from "react";
 import { motion } from "framer-motion";
 import { cn } from "@/lib/utils";
 
 type Direction = "TOP" | "LEFT" | "BOTTOM" | "RIGHT";
 
-interface HoverBorderGradientProps extends React.HTMLAttributes<HTMLDivElement> {
+type HoverBorderGradientProps<T extends React.ElementType = 'div'> = {
   children: React.ReactNode;
   containerClassName?: string;
   className?: string;
   duration?: number;
   clockwise?: boolean;
   gradientColor?: string;
-  as?: React.ElementType;
-}
+  as?: T;
+} & ComponentPropsWithoutRef<T>
 
-export function HoverBorderGradient({
+export function HoverBorderGradient<T extends React.ElementType = 'div'>({
   children,
   containerClassName,
   className,

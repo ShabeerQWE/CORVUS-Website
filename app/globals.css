@@ -105,13 +105,16 @@ nav {
 @supports not (mask-composite: intersect) {
   .glow::after {
     -webkit-mask-composite: source-in !important;
+    mask-composite: intersect !important;
   }
 }
 
 /* Additional webkit support for mask properties */
 .glow::after {
   -webkit-mask-clip: padding-box, border-box;
+  mask-clip: padding-box, border-box;
   -webkit-mask-image: linear-gradient(#0000,#0000),conic-gradient(from calc((var(--start) - var(--spread)) * 1deg), #00000000 0deg, #fff, #00000000 calc(var(--spread) * 2deg));
+  mask-image: linear-gradient(#0000,#0000),conic-gradient(from calc((var(--start) - var(--spread)) * 1deg), #00000000 0deg, #fff, #00000000 calc(var(--spread) * 2deg));
 }
 
 /* Custom scrollbar */

@@ -3,17 +3,54 @@
 import { useState } from 'react';
 import { useForm } from 'react-hook-form';
 import { motion } from 'framer-motion';
-import { Button } from '@/components/ui/moving-border';
 import { AnimatedText } from '@/components/AnimatedText';
 import { AnimatedCard } from '@/components/AnimatedCard';
 import { ParallaxSection } from '@/components/ParallaxSection';
-import { AnimatedInput } from '@/components/AnimatedInput';
+import { Input } from '@/components/ui/input';
+import { Label } from '@/components/ui/label';
+import { cn } from '@/lib/utils';
+
+// Component for input field containers
+const LabelInputContainer = ({
+  children,
+  className,
+}: {
+  children: React.ReactNode;
+  className?: string;
+}) => {
+  return <div className={cn("relative flex w-full flex-col space-y-2", className)}>{children}</div>;
+};
+
+// Animation variants
+const fadeInUp = {
+  initial: { opacity: 0, y: 20 },
+  animate: { opacity: 1, y: 0 },
+  transition: { duration: 0.6 }
+};
+
+const staggerChildren = {
+  animate: {
+    transition: {
+      delayChildren: 0.4,
+      staggerChildren: 0.1
+    }
+  }
+};
 
 type FormData = {
   name: string;
   email: string;
   company?: string;
   message: string;
+};
+
+const BottomGradient = () => {
+  return (
+    <>
+      <span className="absolute inset-x-0 -bottom-px block h-px w-full bg-gradient-to-r from-transparent via-cyan-500 to-transparent opacity-0 transition duration-500 group-hover/btn:opacity-100" />
+      <span className="absolute inset-x-10 -bottom-px mx-auto block h-px w-1/2 bg-gradient-to-r from-transparent via-indigo-500 to-transparent opacity-0 blur-sm transition duration-500 group-hover/btn:opacity-100" />
+    </>
+  );
 };
 
 export default function ContactPage() {
@@ -58,20 +95,6 @@ export default function ContactPage() {
       console.error('Error sending message:', err);
     } finally {
       setIsLoading(false);
-    }
-  };
-
-  const fadeInUp = {
-    initial: { opacity: 0, y: 20 },
-    animate: { opacity: 1, y: 0 },
-    transition: { duration: 0.6 }
-  };
-
-  const staggerChildren = {
-    animate: {
-      transition: {
-        staggerChildren: 0.1
-      }
     }
   };
 
@@ -128,154 +151,197 @@ export default function ContactPage() {
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 max-w-6xl mx-auto">
             {/* Left Column - Contact Form */}
             <AnimatedCard delay={0.1}>
-              <div>
-                <h2 className="text-3xl font-bold mb-6">Send us a message</h2>
+              <div className="relative shadow-input rounded-none bg-gray-900/50 backdrop-blur-sm border border-gray-800 p-4 md:rounded-2xl md:p-8 dark:bg-black">
+                <h2 className="text-3xl font-bold mb-6 text-white">Send us a message</h2>
                 
                 {/* Status Messages */}
                 {showSuccess && (
-                  <motion.div
-                    initial={{ opacity: 0, y: -10 }}
-                    animate={{ opacity: 1, y: 0 }}
-                    className="bg-accent-green/20 border border-accent-green text-accent-green px-4 py-3 rounded-lg mb-6"
-                  >
+                  <div className="bg-accent-green/20 border border-accent-green text-accent-green px-4 py-3 rounded-lg mb-6">
                     Thank you for your message! We'll get back to you soon.
-                  </motion.div>
+                  </div>
                 )}
                 
                 {error && (
-                  <motion.div
-                    initial={{ opacity: 0, y: -10 }}
-                    animate={{ opacity: 1, y: 0 }}
-                    className="bg-red-500/20 border border-red-500 text-red-500 px-4 py-3 rounded-lg mb-6"
-                  >
+                  <div className="bg-red-500/20 border border-red-500 text-red-500 px-4 py-3 rounded-lg mb-6">
                     {error}
-                  </motion.div>
+                  </div>
                 )}
 
                 <form onSubmit={handleSubmit(onSubmit)} className="space-y-6">
-                {/* Name Field */}
-                <AnimatedInput
-                  label="Name *"
-                  type="text"
-                  id="name"
-                  {...register('name', { required: 'Name is required' })}
-                  error={errors.name?.message}
-                />
+                  {/* Name Field */}
+                  <LabelInputContainer>
+                    <Label htmlFor="name">Name *</Label>
+                    <Input
+                      id="name"
+                      type="text"
+                      placeholder="Your name"
+                      {...register('name', {
+                        required: 'Name is required',
+                        minLength: { value: 2, message: 'Name must be at least 2 characters' },
+                        maxLength: { value: 50, message: 'Name must be less than 50 characters' }
+                      })}
+                      className={cn(
+                        "bg-gray-800/50 border border-gray-700",
+                        errors.name && "border-red-500"
+                      )}
+                    />
+                    {errors.name && (
+                      <span className="text-sm text-red-500">{errors.name.message}</span>
+                    )}
+                  </LabelInputContainer>
 
-                {/* Email Field */}
-                <AnimatedInput
-                  label="Email *"
-                  type="email"
-                  id="email"
-                  {...register('email', {
-                    required: 'Email is required',
-                    pattern: {
-                      value: /^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}$/i,
-                      message: 'Invalid email address'
-                    }
-                  })}
-                  error={errors.email?.message}
-                />
+                  {/* Email Field */}
+                  <LabelInputContainer>
+                    <Label htmlFor="email">Email *</Label>
+                    <Input
+                      id="email"
+                      type="email"
+                      placeholder="your.email@example.com"
+                      {...register('email', {
+                        required: 'Email is required',
+                        pattern: {
+                          value: /^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}$/i,
+                          message: 'Please enter a valid email address'
+                        },
+                        maxLength: { value: 100, message: 'Email must be less than 100 characters' }
+                      })}
+                      className={cn(
+                        "bg-gray-800/50 border border-gray-700",
+                        errors.email && "border-red-500"
+                      )}
+                    />
+                    {errors.email && (
+                      <span className="text-sm text-red-500">{errors.email.message}</span>
+                    )}
+                  </LabelInputContainer>
 
-                {/* Company Field */}
-                <AnimatedInput
-                  label="Company (optional)"
-                  type="text"
-                  id="company"
-                  {...register('company')}
-                />
+                  {/* Company Field */}
+                  <LabelInputContainer>
+                    <Label htmlFor="company">Company (optional)</Label>
+                    <Input
+                      id="company"
+                      type="text"
+                      placeholder="Your company name"
+                      {...register('company', {
+                        maxLength: { value: 100, message: 'Company name must be less than 100 characters' }
+                      })}
+                      className="bg-gray-800/50 border border-gray-700"
+                    />
+                    {errors.company && (
+                      <span className="text-sm text-red-500">{errors.company.message}</span>
+                    )}
+                  </LabelInputContainer>
 
-                {/* Message Field */}
-                <AnimatedInput
-                  label="Message *"
-                  textarea
-                  id="message"
-                  rows={5}
-                  {...register('message', { required: 'Message is required' })}
-                  error={errors.message?.message}
-                />
+                  {/* Message Field */}
+                  <LabelInputContainer>
+                    <Label htmlFor="message">Message *</Label>
+                    <textarea
+                      id="message"
+                      rows={5}
+                      placeholder="Your message"
+                      {...register('message', {
+                        required: 'Message is required',
+                        minLength: { value: 10, message: 'Message must be at least 10 characters' },
+                        maxLength: { value: 1000, message: 'Message must be less than 1000 characters' }
+                      })}
+                      className={cn(
+                        "flex w-full rounded-md border bg-gray-800/50 border-gray-700 px-3 py-2 text-sm ring-offset-background placeholder:text-gray-400 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:cursor-not-allowed disabled:opacity-50",
+                        errors.message && "border-red-500"
+                      )}
+                    />
+                    {errors.message && (
+                      <span className="text-sm text-red-500">{errors.message.message}</span>
+                    )}
+                  </LabelInputContainer>
 
-                {/* Submit Button */}
-                <Button
-                  type="submit"
-                  containerClassName="w-full h-14 hover:scale-[1.02] transition-transform duration-200"
-                  className={`bg-accent-blue hover:bg-accent-purple text-white font-semibold text-base transition-all duration-300 ${
-                    isLoading ? 'opacity-50 cursor-not-allowed' : ''
-                  }`}
-                  borderClassName="bg-[radial-gradient(var(--accent-blue-light)_40%,transparent_60%)]"
-                  duration={4000}
-                  disabled={isLoading}
-                >
-                  {isLoading ? 'Sending...' : 'Send Message'}
-                </Button>
-              </form>
+                  {/* Submit Button */}
+                  <div className="relative">
+                    <motion.button
+                      type="submit"
+                      className={cn(
+                        "group/btn relative block h-10 w-full rounded-md bg-gradient-to-br from-accent-blue to-accent-purple font-medium text-white",
+                        "shadow-[0px_1px_0px_0px_#ffffff40_inset,0px_-1px_0px_0px_#ffffff40_inset]",
+                        "transition-all duration-300 ease-out",
+                        "hover:shadow-[0px_0px_20px_0px_#6366f1]",
+                        isLoading && "opacity-50 cursor-not-allowed"
+                      )}
+                      disabled={isLoading}
+                      whileHover={{ scale: 1.02 }}
+                      whileTap={{ scale: 0.98 }}
+                    >
+                      {isLoading ? 'Sending...' : 'Send Message'}
+                      <BottomGradient />
+                    </motion.button>
+                  </div>
+                </form>
               </div>
             </AnimatedCard>
 
             {/* Right Column - Contact Information */}
             <AnimatedCard delay={0.2}>
               <motion.div
-              initial={{ opacity: 0, x: 20 }}
-              animate={{ opacity: 1, x: 0 }}
-              transition={{ duration: 0.6, delay: 0.4 }}
-              className="bg-bg-black border border-border-gray p-8 rounded-xl hover:border-accent-purple transition-all duration-300"
-            >
-              <h2 className="text-3xl font-bold mb-6">Contact Information</h2>
-              
-              <motion.div 
-                className="space-y-6"
-                variants={staggerChildren}
+                variants={fadeInUp}
                 initial="initial"
                 animate="animate"
+                className="bg-bg-black border border-border-gray p-8 rounded-xl hover:border-accent-purple transition-all duration-300"
               >
-                {/* Email */}
-                <motion.div variants={fadeInUp}>
-                  <h3 className="font-semibold mb-1">Email</h3>
-                  <a 
-                    href="mailto:info@corvuslabs.com" 
-                    className="text-accent-blue hover:text-accent-purple transition-colors duration-300"
-                  >
-                    info@corvuslabs.com
-                  </a>
+                <h2 className="text-3xl font-bold mb-6">Contact Information</h2>
+                
+                <motion.div
+                  className="space-y-6"
+                  variants={staggerChildren}
+                  initial="initial"
+                  animate="animate"
+                  layout
+                >
+                  {/* Email */}
+                  <motion.div variants={fadeInUp}>
+                    <h3 className="font-semibold mb-1">Email</h3>
+                    <a 
+                      href="mailto:info@corvuslabs.com" 
+                      className="text-accent-blue hover:text-accent-purple transition-colors duration-300"
+                    >
+                      info@corvuslabs.com
+                    </a>
+                  </motion.div>
+
+                  {/* Phone */}
+                  <motion.div variants={fadeInUp}>
+                    <h3 className="font-semibold mb-1">Phone</h3>
+                    <a 
+                      href="tel:+15551234567" 
+                      className="text-accent-blue hover:text-accent-purple transition-colors duration-300"
+                    >
+                      +1 (555) 123-4567
+                    </a>
+                  </motion.div>
+
+                  {/* Address */}
+                  <motion.div variants={fadeInUp}>
+                    <h3 className="font-semibold mb-1">Address</h3>
+                    <p className="text-text-secondary">
+                      123 Innovation Drive<br />
+                      Tech City, TC 12345
+                    </p>
+                  </motion.div>
+
+                  {/* Business Hours */}
+                  <motion.div variants={fadeInUp}>
+                    <h3 className="font-semibold mb-1">Business Hours</h3>
+                    <p className="text-text-secondary">
+                      Monday-Friday<br />
+                      9AM-6PM EST
+                    </p>
+                  </motion.div>
                 </motion.div>
 
-                {/* Phone */}
-                <motion.div variants={fadeInUp}>
-                  <h3 className="font-semibold mb-1">Phone</h3>
-                  <a 
-                    href="tel:+15551234567" 
-                    className="text-accent-blue hover:text-accent-purple transition-colors duration-300"
-                  >
-                    +1 (555) 123-4567
-                  </a>
-                </motion.div>
-
-                {/* Address */}
-                <motion.div variants={fadeInUp}>
-                  <h3 className="font-semibold mb-1">Address</h3>
-                  <p className="text-text-secondary">
-                    123 Innovation Drive<br />
-                    Tech City, TC 12345
+                {/* Decorative Element */}
+                <div className="mt-8 pt-8 border-t border-border-gray">
+                  <p className="text-text-secondary text-sm">
+                    We typically respond within 24 business hours. For urgent matters, please call us directly.
                   </p>
-                </motion.div>
-
-                {/* Business Hours */}
-                <motion.div variants={fadeInUp}>
-                  <h3 className="font-semibold mb-1">Business Hours</h3>
-                  <p className="text-text-secondary">
-                    Monday-Friday<br />
-                    9AM-6PM EST
-                  </p>
-                </motion.div>
+                </div>
               </motion.div>
-
-              {/* Decorative Element */}
-              <div className="mt-8 pt-8 border-t border-border-gray">
-                <p className="text-text-secondary text-sm">
-                  We typically respond within 24 business hours. For urgent matters, please call us directly.
-                </p>
-              </div>
-            </motion.div>
             </AnimatedCard>
           </div>
         </div>
