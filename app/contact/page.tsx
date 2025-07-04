@@ -45,15 +45,6 @@ type FormData = {
   message: string;
 };
 
-const BottomGradient = () => {
-  return (
-    <>
-      <span className="absolute inset-x-0 -bottom-px block h-px w-full bg-gradient-to-r from-transparent via-cyan-500 to-transparent opacity-0 transition duration-500 group-hover/btn:opacity-100" />
-      <span className="absolute inset-x-10 -bottom-px mx-auto block h-px w-1/2 bg-gradient-to-r from-transparent via-indigo-500 to-transparent opacity-0 blur-sm transition duration-500 group-hover/btn:opacity-100" />
-    </>
-  );
-};
-
 export default function ContactPage() {
   const [showSuccess, setShowSuccess] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
@@ -118,7 +109,7 @@ export default function ContactPage() {
               </span>
             </h1>
             <p className="text-xl md:text-2xl max-w-2xl mx-auto text-text-secondary">
-              Let's discuss how we can transform your business
+              Let&apos;s discuss how we can transform your business
             </p>
           </AnimatedText>
         </div>
@@ -165,7 +156,7 @@ export default function ContactPage() {
                 {/* Status Messages */}
                 {showSuccess && (
                   <div className="bg-accent-green/20 border border-accent-green text-accent-green px-4 py-3 rounded-lg mb-6">
-                    Thank you for your message! We'll get back to you soon.
+                    Thank you for your message! We&apos;ll get back to you soon.
                   </div>
                 )}
                 

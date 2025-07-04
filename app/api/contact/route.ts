@@ -31,7 +31,7 @@ export async function POST(req: Request) {
     }
 
     // Send notification email to admin
-    const adminEmailData = await resend.emails.send({
+    await resend.emails.send({
       from: FROM_EMAIL,
       to: TO_EMAIL,
       subject: 'New Contact Form Submission',
@@ -45,7 +45,7 @@ export async function POST(req: Request) {
     });
 
     // Send confirmation email to user
-    const userEmailData = await resend.emails.send({
+    await resend.emails.send({
       from: FROM_EMAIL,
       to: email,
       subject: 'Thank you for contacting Corvus Labs',

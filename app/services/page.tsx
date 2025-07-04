@@ -1,7 +1,6 @@
 'use client';
 
 import { motion } from 'framer-motion';
-import Link from 'next/link';
 import {
   FaRobot,
   FaChartLine,
@@ -159,7 +158,7 @@ export default function ServicesPage() {
               Ready to Transform Your Business?
             </h2>
             <p className="text-xl mb-8 text-text-secondary">
-              Let's discuss how our services can help you achieve your goals and drive growth
+              Let&apos;s discuss how our services can help you achieve your goals and drive growth
             </p>
             <div className="flex flex-col sm:flex-row gap-4 justify-center">
               <AnimatedButton href="/contact" variant="primary" size="lg">

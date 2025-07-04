@@ -1,26 +1,11 @@
 'use client';
 
 import { motion } from 'framer-motion';
-import Link from 'next/link';
 import AboutParticles from '@/components/AboutParticles';
 import { AnimatedText } from '@/components/AnimatedText';
 import { AnimatedCard } from '@/components/AnimatedCard';
 import { AnimatedButton } from '@/components/AnimatedButton';
 import { ParallaxSection } from '@/components/ParallaxSection';
-
-const fadeInUp = {
-  initial: { opacity: 0, y: 20 },
-  animate: { opacity: 1, y: 0 },
-  transition: { duration: 0.6 }
-};
-
-const staggerContainer = {
-  animate: {
-    transition: {
-      staggerChildren: 0.1
-    }
-  }
-};
 
 export default function AboutPage() {
   const values = [
@@ -131,7 +116,7 @@ export default function AboutPage() {
                 </div>
                 <p className="text-lg text-text-secondary leading-relaxed">
                   To be the leading partner in digital transformation, recognized for our innovative solutions,
-                  exceptional service, and commitment to our clients' success. We envision a future where every
+                  exceptional service, and commitment to our clients&apos; success. We envision a future where every
                   business can harness the power of AI and automation.
                 </p>
               </div>
@@ -220,7 +205,7 @@ export default function AboutPage() {
           <AnimatedText className="max-w-3xl mx-auto" direction="up">
             <h2 className="text-4xl md:text-5xl font-bold mb-6">Ready to Transform Your Business?</h2>
             <p className="text-xl mb-8 text-text-secondary">
-              Let's discuss how we can help you achieve your goals
+              Let&apos;s discuss how we can help you achieve your goals
             </p>
             <AnimatedButton href="/contact" variant="primary" size="lg">
               Get in Touch

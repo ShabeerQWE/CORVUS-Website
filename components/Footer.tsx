@@ -1,5 +1,4 @@
 import React from 'react'
-import Link from 'next/link'
 
 const Footer = () => {
   const currentYear = new Date().getFullYear()
@@ -14,6 +13,7 @@ const Footer = () => {
             <p className="text-text-secondary text-sm mb-4">
               Smarter Systems. Seamless Growth.
             </p>
+            {/* eslint-disable-next-line @next/next/no-img-element */}
             <img
               className="h-8 w-auto"
               src="/corvus-logo.svg"

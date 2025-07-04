@@ -62,7 +62,7 @@ export default function AboutParticles() {
       return 1
     }
 
-    function createParticle(scale: number) {
+    function createParticle() {
       if (!ctx || !canvas || !textImageData) return null
 
       const data = textImageData.data
@@ -95,12 +95,12 @@ export default function AboutParticles() {
       return null
     }
 
-    function createInitialParticles(scale: number) {
+    function createInitialParticles() {
       if (!canvas) return
       const baseParticleCount = 3000
       const particleCount = Math.floor(baseParticleCount * (canvas.width * canvas.height) / (800 * 200))
       for (let i = 0; i < particleCount; i++) {
-        const particle = createParticle(scale)
+        const particle = createParticle()
         if (particle) particles.push(particle)
       }
     }
@@ -139,7 +139,7 @@ export default function AboutParticles() {
 
         p.life--
         if (p.life <= 0) {
-          const newParticle = createParticle(scale)
+          const newParticle = createParticle()
           if (newParticle) {
             particles[i] = newParticle
           } else {
@@ -154,7 +154,7 @@ export default function AboutParticles() {
         baseParticleCount * (canvas.width * canvas.height) / (800 * 200),
       )
       while (particles.length < targetParticleCount) {
-        const newParticle = createParticle(scale)
+        const newParticle = createParticle()
         if (newParticle) particles.push(newParticle)
       }
 
@@ -162,14 +162,14 @@ export default function AboutParticles() {
     }
 
     const scale = createTextImage()
-    createInitialParticles(scale)
+    createInitialParticles()
     animate(scale)
 
     const handleResize = () => {
       updateCanvasSize()
-      const newScale = createTextImage()
+      createTextImage()
       particles = []
-      createInitialParticles(newScale)
+      createInitialParticles()
     }
 
     const handleMove = (x: number, y: number) => {

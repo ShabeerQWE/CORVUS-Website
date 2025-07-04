@@ -16,22 +16,14 @@ export function Button({
 }: {
   borderRadius?: string
   children: React.ReactNode
-  as?: any
+  as?: React.ElementType
   containerClassName?: string
   borderClassName?: string
   duration?: number
   className?: string
-  [key: string]: any
-}) {
-  return (
-    <Component
-      className={cn("relative h-16 w-40 overflow-hidden bg-transparent p-[1px] text-xl", containerClassName)}
-      style={{
-        borderRadius: borderRadius,
-        position: "relative"
-      }}
-      {...otherProps}
-    >
+} & React.HTMLAttributes<HTMLElement>) {
+  const content = (
+    <>
       <div className="absolute inset-0" style={{ borderRadius: `calc(${borderRadius} * 0.96)`, position: "relative" }}>
         <MovingBorder duration={duration} rx="30%" ry="30%">
           <div
@@ -52,7 +44,23 @@ export function Button({
       >
         {children}
       </div>
-    </Component>
+    </>
+  );
+
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  const Element = Component as any;
+  
+  return (
+    <Element
+      className={cn("relative h-16 w-40 overflow-hidden bg-transparent p-[1px] text-xl", containerClassName)}
+      style={{
+        borderRadius: borderRadius,
+        position: "relative"
+      }}
+      {...otherProps}
+    >
+      {content}
+    </Element>
   )
 }
 
@@ -67,8 +75,7 @@ export const MovingBorder = ({
   duration?: number
   rx?: string
   ry?: string
-  [key: string]: any
-}) => {
+} & React.SVGAttributes<SVGElement>) => {
   const pathRef = useRef<SVGPathElement>(null)
   const svgRef = useRef<SVGSVGElement>(null)
   const progress = useMotionValue<number>(0)

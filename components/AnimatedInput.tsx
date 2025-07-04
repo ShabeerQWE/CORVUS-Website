@@ -38,13 +38,13 @@ export const AnimatedInput = forwardRef<HTMLInputElement | HTMLTextAreaElement, 
         >
           {textarea ? (
             <textarea
-              ref={ref as any}
+              ref={ref as React.Ref<HTMLTextAreaElement>}
               className={baseClasses}
               {...(props as TextareaHTMLAttributes<HTMLTextAreaElement>)}
             />
           ) : (
             <input
-              ref={ref as any}
+              ref={ref as React.Ref<HTMLInputElement>}
               className={baseClasses}
               {...(props as InputHTMLAttributes<HTMLInputElement>)}
             />
