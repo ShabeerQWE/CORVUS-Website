@@ -57,8 +57,10 @@ export default function ContactPage() {
       <ParallaxSection className="relative overflow-hidden py-24">
         <div className="container mx-auto px-4">
           <AnimatedText className="text-center">
-            <h1 className="text-5xl md:text-7xl font-bold mb-6 bg-gradient-to-r from-accent-blue to-accent-purple bg-clip-text text-transparent">
-              Get in Touch
+            <h1 className="text-5xl md:text-7xl font-bold mb-6">
+              <span className="bg-gradient-to-r from-blue-400 to-purple-600 bg-clip-text text-transparent">
+                Get in Touch
+              </span>
             </h1>
             <p className="text-xl md:text-2xl max-w-2xl mx-auto text-text-secondary">
               Let's discuss how we can transform your business
@@ -164,7 +166,7 @@ export default function ContactPage() {
                   type="submit"
                   containerClassName="w-full h-14 hover:scale-[1.02] transition-transform duration-200"
                   className="bg-accent-blue hover:bg-accent-purple text-white font-semibold text-base transition-all duration-300"
-                  borderClassName="bg-[radial-gradient(var(--accent-blue)_40%,transparent_60%)]"
+                  borderClassName="bg-[radial-gradient(var(--accent-blue-light)_40%,transparent_60%)]"
                   duration={4000}
                 >
                   Send Message

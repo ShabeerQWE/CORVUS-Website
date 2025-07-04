@@ -40,15 +40,14 @@ export function AnimatedButton({
     <MotionComponent
       className={baseClasses}
       onClick={onClick}
-      whileHover={{ 
+      whileHover={{
         scale: 1.05,
         boxShadow: variant === 'primary' ? '0 10px 30px rgba(102, 204, 255, 0.3)' : 'none'
       }}
       whileTap={{ scale: 0.98 }}
       transition={{
-        type: "spring",
-        stiffness: 400,
-        damping: 17
+        duration: 0.2,
+        ease: "easeOut"
       }}
     >
       {children}
@@ -60,7 +59,7 @@ export function AnimatedButton({
           viewBox="0 0 24 24"
           initial={{ x: 0 }}
           whileHover={{ x: 5 }}
-          transition={{ type: "spring", stiffness: 400, damping: 17 }}
+          transition={{ duration: 0.2, ease: "easeOut" }}
         >
           <path
             strokeLinecap="round"
@@ -84,9 +83,8 @@ export function AnimatedButton({
           }}
           whileTap={{ scale: 0.98 }}
           transition={{
-            type: "spring",
-            stiffness: 400,
-            damping: 17
+            duration: 0.2,
+            ease: "easeOut"
           }}
         >
           {children}
@@ -97,7 +95,7 @@ export function AnimatedButton({
             viewBox="0 0 24 24"
             initial={{ x: 0 }}
             whileHover={{ x: 5 }}
-            transition={{ type: "spring", stiffness: 400, damping: 17 }}
+            transition={{ duration: 0.2, ease: "easeOut" }}
           >
             <path
               strokeLinecap="round"

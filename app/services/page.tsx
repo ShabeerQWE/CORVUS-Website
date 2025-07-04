@@ -107,8 +107,10 @@ export default function ServicesPage() {
       <ParallaxSection className="relative overflow-hidden py-24">
         <div className="container mx-auto px-4">
           <AnimatedText className="max-w-4xl mx-auto text-center">
-            <h1 className="text-5xl md:text-7xl font-bold mb-6 bg-gradient-to-r from-accent-blue to-accent-purple bg-clip-text text-transparent">
-              Our Services
+            <h1 className="text-5xl md:text-7xl font-bold mb-6">
+              <span className="bg-gradient-to-r from-blue-400 to-purple-600 bg-clip-text text-transparent">
+                Our Services
+              </span>
             </h1>
             <p className="text-xl md:text-2xl text-text-secondary">
               Comprehensive solutions to transform and grow your business
@@ -181,9 +183,8 @@ export default function ServicesPage() {
                             key={idx}
                             className="flex items-start"
                             initial={{ opacity: 0, x: -20 }}
-                            whileInView={{ opacity: 1, x: 0 }}
-                            transition={{ delay: idx * 0.1 }}
-                            viewport={{ once: true }}
+                            animate={{ opacity: 1, x: 0 }}
+                            transition={{ delay: 0.3 + idx * 0.1 }}
                           >
                             <span className={`${service.colorClass} mr-2`}>✓</span>
                             <span className="text-text-secondary text-sm">{detail}</span>
@@ -201,9 +202,8 @@ export default function ServicesPage() {
                             key={idx}
                             className="flex items-start"
                             initial={{ opacity: 0, x: -20 }}
-                            whileInView={{ opacity: 1, x: 0 }}
-                            transition={{ delay: idx * 0.1 }}
-                            viewport={{ once: true }}
+                            animate={{ opacity: 1, x: 0 }}
+                            transition={{ delay: 0.8 + idx * 0.1 }}
                           >
                             <span className="text-accent-green mr-2">•</span>
                             <span className="text-text-secondary text-sm">{benefit}</span>

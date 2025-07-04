@@ -38,14 +38,6 @@ const Navigation = () => {
                 whileTap={{ scale: 0.95 }}
                 transition={{ type: "spring", stiffness: 400, damping: 17 }}
               />
-              <motion.span
-                className="ml-2 text-xl font-bold text-text-primary hidden sm:block"
-                initial={{ opacity: 0, x: -10 }}
-                animate={{ opacity: 1, x: 0 }}
-                transition={{ delay: 0.2 }}
-              >
-                Corvus Labs
-              </motion.span>
             </Link>
           </div>
 

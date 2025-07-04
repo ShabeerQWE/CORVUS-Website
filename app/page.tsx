@@ -25,8 +25,10 @@ export default function Home() {
         <div className="container mx-auto px-4 py-24 md:py-32 relative z-10">
           <div className="text-center max-w-4xl mx-auto">
             <AnimatedText delay={0.1}>
-              <h1 className="text-5xl md:text-7xl font-bold mb-6 bg-gradient-to-r from-accent-blue to-accent-purple bg-clip-text text-transparent">
-                Smarter Systems. Seamless Growth.
+              <h1 className="text-5xl md:text-7xl font-bold mb-6">
+                <span className="bg-gradient-to-r from-blue-400 to-purple-600 bg-clip-text text-transparent">
+                  Smarter Systems. Seamless Growth.
+                </span>
               </h1>
             </AnimatedText>
             
