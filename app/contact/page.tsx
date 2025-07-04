@@ -9,6 +9,7 @@ import { ParallaxSection } from '@/components/ParallaxSection';
 import { Input } from '@/components/ui/input';
 import { Label } from '@/components/ui/label';
 import { cn } from '@/lib/utils';
+import { StatefulButton } from '@/components/ui/stateful-button';
 
 // Component for input field containers
 const LabelInputContainer = ({
@@ -255,24 +256,13 @@ export default function ContactPage() {
                   </LabelInputContainer>
 
                   {/* Submit Button */}
-                  <div className="relative">
-                    <motion.button
-                      type="submit"
-                      className={cn(
-                        "group/btn relative block h-10 w-full rounded-md bg-gradient-to-br from-accent-blue to-accent-purple font-medium text-white",
-                        "shadow-[0px_1px_0px_0px_#ffffff40_inset,0px_-1px_0px_0px_#ffffff40_inset]",
-                        "transition-all duration-300 ease-out",
-                        "hover:shadow-[0px_0px_20px_0px_#6366f1]",
-                        isLoading && "opacity-50 cursor-not-allowed"
-                      )}
-                      disabled={isLoading}
-                      whileHover={{ scale: 1.02 }}
-                      whileTap={{ scale: 0.98 }}
-                    >
-                      {isLoading ? 'Sending...' : 'Send Message'}
-                      <BottomGradient />
-                    </motion.button>
-                  </div>
+                  <StatefulButton
+                    type="submit"
+                    disabled={isLoading}
+                    isLoading={isLoading}
+                  >
+                    Send Message
+                  </StatefulButton>
                 </form>
               </div>
             </AnimatedCard>
