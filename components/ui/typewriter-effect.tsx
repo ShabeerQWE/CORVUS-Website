@@ -8,7 +8,7 @@ export function TypewriterEffect({
 }: {
   words: string[];
   className?: string;
-  [key: string]: any;
+  [key: string]: unknown;
 }) {
   const [index, setIndex] = React.useState(0);
   const [subIndex, setSubIndex] = React.useState(0);
