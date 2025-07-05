@@ -15,45 +15,25 @@ import { AnimatedText } from '@/components/AnimatedText'
 import { AnimatedCard } from '@/components/AnimatedCard'
 import { AnimatedButton } from '@/components/AnimatedButton'
 import { ParallaxSection } from '@/components/ParallaxSection'
+import { WavyBackground } from "@/components/ui/wavy-background";
 
 export default function Home() {
   return (
     <main className="min-h-screen bg-bg-black text-text-primary">
-      {/* Hero Section */}
-      <section className="relative overflow-hidden">
-        <div className="container mx-auto px-4 py-24 md:py-32 relative z-10">
-          <div className="text-center max-w-4xl mx-auto">
-            <AnimatedText delay={0.1}>
-              <h1 className="text-5xl md:text-7xl font-bold mb-6">
-                <span className="bg-gradient-to-r from-blue-400 to-purple-600 bg-clip-text text-transparent">
-                  Smarter Systems. Seamless Growth.
-                </span>
-              </h1>
-            </AnimatedText>
-            
-            <AnimatedText delay={0.3} direction="up">
-              <p className="text-xl md:text-2xl text-text-secondary mb-8 max-w-2xl mx-auto">
-                Corvus Labs helps businesses automate and optimize their operations with cutting-edge AI, CRM, ERP, and MSP solutions.
-              </p>
-            </AnimatedText>
-            
-            <AnimatedText delay={0.5}>
-              <AnimatedButton href="/contact" variant="primary" size="lg">
-                Get Started Today
-              </AnimatedButton>
-            </AnimatedText>
-          </div>
+      {/* Hero Section with WavyBackground */}
+      <WavyBackground className="max-w-4xl mx-auto pb-40">
+<h1 className="text-2xl md:text-4xl lg:text-7xl font-extrabold text-white text-center tracking-tight drop-shadow-lg">
+  Smarter Systems.<br />Seamless Growth.
+</h1>
+        <p className="text-base md:text-lg mt-4 text-white font-normal inter-var text-center">
+          Corvus Labs helps businesses automate and optimize their operations with cutting-edge AI, CRM, ERP, and MSP solutions.
+        </p>
+        <div className="mt-8 flex justify-center">
+          <AnimatedButton href="/contact" variant="primary" size="lg">
+            Get Started Today
+          </AnimatedButton>
         </div>
-        
-        {/* Background gradient effect */}
-        <div className="absolute inset-0 -z-10 overflow-hidden">
-          <ParallaxSection className="relative h-full" speed={0.15} offset={0}>
-            <div className="absolute top-0 -left-4 w-72 h-72 bg-accent-purple/20 rounded-full mix-blend-multiply filter blur-xl opacity-70 animate-blob"></div>
-            <div className="absolute top-0 -right-4 w-72 h-72 bg-accent-blue/20 rounded-full mix-blend-multiply filter blur-xl opacity-70 animate-blob animation-delay-2000"></div>
-            <div className="absolute -bottom-8 left-20 w-72 h-72 bg-accent-green/20 rounded-full mix-blend-multiply filter blur-xl opacity-70 animate-blob animation-delay-4000"></div>
-          </ParallaxSection>
-        </div>
-      </section>
+      </WavyBackground>
 
       {/* Services Overview Section */}
       <section className="py-20 bg-bg-gray">
