@@ -71,7 +71,7 @@ export default function Home() {
               delay={0.1}
               className="bg-bg-black border border-border-gray rounded-xl p-8 hover:border-accent-blue transition-all duration-300 group"
             >
-              <div className="text-accent-blue text-4xl mb-4 group-hover:scale-110 transition-transform duration-300">
+              <div className="text-accent-blue text-4xl mb-4 group-hover:scale-110 transition-transform duration-500">
                 <FaRobot />
               </div>
               <h3 className="text-2xl font-bold mb-3">AI Automation</h3>
@@ -85,7 +85,7 @@ export default function Home() {
               delay={0.2}
               className="bg-bg-black border border-border-gray rounded-xl p-8 hover:border-accent-purple transition-all duration-300 group"
             >
-              <div className="text-accent-purple text-4xl mb-4 group-hover:scale-110 transition-transform duration-300">
+              <div className="text-accent-purple text-4xl mb-4 group-hover:scale-110 transition-transform duration-500">
                 <FaChartLine />
               </div>
               <h3 className="text-2xl font-bold mb-3">CRM Systems</h3>
@@ -99,7 +99,7 @@ export default function Home() {
               delay={0.3}
               className="bg-bg-black border border-border-gray rounded-xl p-8 hover:border-accent-green transition-all duration-300 group"
             >
-              <div className="text-accent-green text-4xl mb-4 group-hover:scale-110 transition-transform duration-300">
+              <div className="text-accent-green text-4xl mb-4 group-hover:scale-110 transition-transform duration-500">
                 <FaCogs />
               </div>
               <h3 className="text-2xl font-bold mb-3">ERP Solutions</h3>
@@ -113,7 +113,7 @@ export default function Home() {
               delay={0.4}
               className="bg-bg-black border border-border-gray rounded-xl p-8 hover:border-accent-orange transition-all duration-300 group"
             >
-              <div className="text-accent-orange text-4xl mb-4 group-hover:scale-110 transition-transform duration-300">
+              <div className="text-accent-orange text-4xl mb-4 group-hover:scale-110 transition-transform duration-500">
                 <FaServer />
               </div>
               <h3 className="text-2xl font-bold mb-3">MSP Services</h3>

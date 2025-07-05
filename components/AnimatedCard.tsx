@@ -15,8 +15,8 @@ export function AnimatedCard({
   children,
   className = '',
   delay = 0,
-  duration = 0.6,
-  scale = 0.95
+  duration = 0.28, // faster and smoother
+  scale = 0.97     // less "pop" for a more natural feel
 }: AnimatedCardProps) {
   const { ref, isInView } = useScrollAnimation();
 
@@ -26,21 +26,21 @@ export function AnimatedCard({
       initial={{ 
         opacity: 0,
         scale: scale,
-        y: 20
+        y: 24
       }}
       animate={{
         opacity: isInView ? 1 : 0,
         scale: isInView ? 1 : scale,
-        y: isInView ? 0 : 20
+        y: isInView ? 0 : 24
       }}
       transition={{
         duration,
         delay,
-        ease: [0.25, 0.1, 0.25, 1]
+        ease: [0.22, 1, 0.36, 1] // smooth "ease out"
       }}
       whileHover={{
-        scale: 1.02,
-        transition: { duration: 0.2 }
+        scale: 1.025,
+        transition: { duration: 0.18, ease: [0.22, 1, 0.36, 1] }
       }}
       className={className}
     >
