@@ -143,7 +143,6 @@ export default function ContactPage() {
           />
         </div>
       </ParallaxSection>
-
       {/* Contact Form and Info Section */}
       <section className="py-16 bg-bg-gray">
         <div className="container mx-auto px-4">
@@ -334,7 +333,6 @@ export default function ContactPage() {
           </div>
         </div>
       </section>
-
       {/* Calendly Section */}
       <section className="py-16">
         <div className="container mx-auto px-4">

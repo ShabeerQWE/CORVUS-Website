@@ -34,42 +34,47 @@ export function AnimatedButton({
 
   const baseClasses = `inline-flex items-center justify-center font-semibold rounded-lg transition-all duration-300 ${sizeClasses[size]} ${variantClasses[variant]} ${className}`;
 
-  if (href) {
-    return (
-      <Link href={href} passHref legacyBehavior>
-        <motion.a
-          className={baseClasses}
-          whileHover={{
-            scale: 1.05,
-            boxShadow: variant === 'primary' ? '0 10px 30px rgba(102, 204, 255, 0.3)' : 'none'
-          }}
-          whileTap={{ scale: 0.98 }}
-          transition={{
-            duration: 0.2,
-            ease: "easeOut"
-          }}
+// ...existing code...
+if (href) {
+  return (
+    <Link href={href}>
+      <motion.span
+        className={baseClasses}
+        whileHover={{
+          scale: 1.05,
+          boxShadow: variant === 'primary' ? '0 10px 30px rgba(102, 204, 255, 0.3)' : 'none'
+        }}
+        whileTap={{ scale: 0.98 }}
+        transition={{
+          duration: 0.2,
+          ease: "easeOut"
+        }}
+        style={{ display: 'inline-flex', alignItems: 'center', justifyContent: 'center', width: '100%' }}
+        tabIndex={0}
+        role="link"
+      >
+        {children}
+        <motion.svg
+          className="ml-2 w-5 h-5"
+          fill="none"
+          stroke="currentColor"
+          viewBox="0 0 24 24"
+          initial={{ x: 0 }}
+          whileHover={{ x: 5 }}
+          transition={{ duration: 0.2, ease: "easeOut" }}
         >
-          {children}
-          <motion.svg
-            className="ml-2 w-5 h-5"
-            fill="none"
-            stroke="currentColor"
-            viewBox="0 0 24 24"
-            initial={{ x: 0 }}
-            whileHover={{ x: 5 }}
-            transition={{ duration: 0.2, ease: "easeOut" }}
-          >
-            <path
-              strokeLinecap="round"
-              strokeLinejoin="round"
-              strokeWidth={2}
-              d="M9 5l7 7-7 7"
-            />
-          </motion.svg>
-        </motion.a>
-      </Link>
-    );
-  }
+          <path
+            strokeLinecap="round"
+            strokeLinejoin="round"
+            strokeWidth={2}
+            d="M9 5l7 7-7 7"
+          />
+        </motion.svg>
+      </motion.span>
+    </Link>
+  );
+}
+// ...existing code...
 
   return (
     <motion.button

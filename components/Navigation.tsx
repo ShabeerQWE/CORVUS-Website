@@ -19,7 +19,7 @@ const Navigation = () => {
 
   return (
     <motion.nav
-      className="bg-bg-black border-b border-border-gray sticky top-0 z-50"
+      className="bg-black border-b border-border-gray sticky top-0 z-50"
       initial={{ y: -100 }}
       animate={{ y: 0 }}
       transition={{ duration: 0.5 }}
@@ -55,20 +55,22 @@ const Navigation = () => {
                     href={link.href}
                     className="relative text-text-primary hover:text-accent-blue px-3 py-2 rounded-md text-sm font-medium transition-colors duration-200 group"
                   >
-                    {link.label}
-                    {pathname === link.href && (
+                    <span className="relative">
+                      {link.label}
+                      {pathname === link.href && (
+                        <motion.div
+                          className="absolute bottom-0 left-0 right-0 h-0.5 bg-accent-blue"
+                          layoutId="navbar-indicator"
+                          transition={{ type: "spring", stiffness: 380, damping: 30 }}
+                        />
+                      )}
                       <motion.div
-                        className="absolute bottom-0 left-0 right-0 h-0.5 bg-accent-blue"
-                        layoutId="navbar-indicator"
-                        transition={{ type: "spring", stiffness: 380, damping: 30 }}
+                        className="absolute bottom-0 left-0 right-0 h-0.5 bg-accent-blue opacity-0 group-hover:opacity-100"
+                        initial={{ scaleX: 0 }}
+                        whileHover={{ scaleX: 1 }}
+                        transition={{ duration: 0.3 }}
                       />
-                    )}
-                    <motion.div
-                      className="absolute bottom-0 left-0 right-0 h-0.5 bg-accent-blue opacity-0 group-hover:opacity-100"
-                      initial={{ scaleX: 0 }}
-                      whileHover={{ scaleX: 1 }}
-                      transition={{ duration: 0.3 }}
-                    />
+                    </span>
                   </Link>
                 </motion.div>
               ))}
@@ -116,7 +118,6 @@ const Navigation = () => {
           </div>
         </div>
       </div>
-
       {/* Mobile menu */}
       <AnimatePresence>
         {isMenuOpen && (
@@ -152,7 +153,7 @@ const Navigation = () => {
         )}
       </AnimatePresence>
     </motion.nav>
-  )
+  );
 }
 
 export default Navigation
