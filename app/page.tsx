@@ -14,7 +14,6 @@ import {
 import { AnimatedText } from '@/components/AnimatedText'
 import { AnimatedCard } from '@/components/AnimatedCard'
 import { AnimatedButton } from '@/components/AnimatedButton'
-import { ParallaxSection } from '@/components/ParallaxSection'
 import { WavyBackground } from "@/components/ui/wavy-background";
 import { TypewriterEffect } from "@/components/ui/typewriter-effect";
 
