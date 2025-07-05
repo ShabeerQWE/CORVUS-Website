@@ -16,15 +16,14 @@ import { AnimatedCard } from '@/components/AnimatedCard'
 import { AnimatedButton } from '@/components/AnimatedButton'
 import { ParallaxSection } from '@/components/ParallaxSection'
 import { WavyBackground } from "@/components/ui/wavy-background";
+import { TypewriterEffect } from "@/components/ui/typewriter-effect";
 
 export default function Home() {
   return (
     <main className="min-h-screen bg-bg-black text-text-primary">
       {/* Hero Section with WavyBackground */}
-      <WavyBackground className="max-w-4xl mx-auto pb-40">
-<h1 className="text-2xl md:text-4xl lg:text-7xl font-extrabold text-white text-center tracking-tight drop-shadow-lg">
-  Smarter Systems.<br />Seamless Growth.
-</h1>
+      <WavyBackground className="max-w-8xl mx-auto pb-40">
+        <TypewriterEffect words={["Smarter Systems, Seamless Growth.."]} />
         <p className="text-base md:text-lg mt-4 text-white font-normal inter-var text-center">
           Corvus Labs helps businesses automate and optimize their operations with cutting-edge AI, CRM, ERP, and MSP solutions.
         </p>
